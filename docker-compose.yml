@@ -1,8 +1,9 @@
 services:
-  flask-app:
+  pdf-reader:
+    mem_limit: 2048m
     build: .
-    ports:
-      - "5000:5000"
+    # ports:
+    #   - "5000:5000"
     volumes:
       - .:/app
     environment:
