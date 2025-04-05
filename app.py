@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from paddleocr import PaddleOCR
 from werkzeug.utils import secure_filename
 import os
+import gc
 
 app = Flask(__name__)
 
@@ -32,6 +33,9 @@ def extract_text():
     except Exception as e:
         os.remove(file_path)  # Clean up the uploaded file in case of error
         return jsonify({"error": str(e)}), 500
+    finally:
+        # Clean up any remaining garbage
+        gc.collect()
 
 if __name__ == '__main__':
     app.run(
