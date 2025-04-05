@@ -10,6 +10,9 @@ WORKDIR /app
 
 # Copy project files
 COPY . /app
+# Set environment variables to ensure logs are displayed
+ENV PYTHONUNBUFFERED=1
+ENV FLASK_ENV=development
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
