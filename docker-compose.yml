@@ -1,6 +1,6 @@
 services:
   pdf-reader:
-    mem_limit: 2048m
+    # mem_limit: 2048m
     build: .
     # ports:
     #   - "5000:5000"
