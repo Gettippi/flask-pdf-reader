@@ -18,7 +18,8 @@ RUN wget https://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1
 # libgompso1 issue
 RUN apt-get update && apt-get install -y libgomp1
 # RUN apt-get update && apt-get install -y libgl1-mesa-glx
-# RUN apt-get update && apt-get install -y libglib2.0-0
+# libgthread-2.0.so.0
+RUN apt-get update && apt-get install -y libglib2.0-0 libsm6 libxrender1 libxext6
 
 # Set the working directory
 WORKDIR /app
