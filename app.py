@@ -6,6 +6,9 @@ import gc
 
 app = Flask(__name__)
 
+# Initialize PaddleOCR
+ocr = PaddleOCR(use_angle_cls=True, lang='en')
+
 # Temporary folder to save uploaded files
 UPLOAD_FOLDER = './uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -13,9 +16,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/extract-text', methods=['POST'])
 def extract_text():
-    
-    # Initialize PaddleOCR
-    ocr = PaddleOCR(use_angle_cls=True, lang='en')
     
     if 'pdf' not in request.files:
         return jsonify({"error": "No PDF file provided"}), 400
@@ -38,6 +38,7 @@ def extract_text():
     
     finally:
         # Clean up any remaining garbage
+        ocr.clear()  # Clear PaddleOCR cache
         gc.collect()
 
 
