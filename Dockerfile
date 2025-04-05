@@ -1,21 +1,22 @@
-# Use the official Python image as the base image
+# Use an appropriate base image
 FROM python:3.9-slim
 
-# Set the working directory in the container
+# Install system dependencies, including libgomp
+RUN apt-get update && apt-get install -y \
+    libgomp1 \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Set the working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y libgomp1 && rm -rf /var/lib/apt/lists/*
+# Copy project files
+COPY . /app
 
-# Copy the requirements file and install dependencies
-COPY requirements.txt .
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application code
-COPY . .
-
-# Expose the port the app runs on
+# Expose the application port
 EXPOSE 5000
 
-# Command to run the application
-CMD ["python", "app.py"]
+# Define the command to run the application
+CMD ["flask", "run", "--host=0.0.0.0"]

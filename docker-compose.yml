@@ -1,10 +1,8 @@
 services:
-  pdf-reader:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    # ports:
-    #   - "5000:5000"
+  flask-app:
+    build: .
+    ports:
+      - "5000:5000"
     volumes:
       - .:/app
     environment:
