@@ -1,3 +1,4 @@
 Flask
 paddlepaddle
 paddleocr
+opencv-python
