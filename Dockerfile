@@ -7,7 +7,7 @@ FROM python:3.9-slim
 
 RUN apt-get update && apt-get install -y \
     libgl1 \
-    libssl.so.1
+    libssl.so.1.1
 
 # Set the working directory
 WORKDIR /app
