@@ -20,7 +20,7 @@ eval_type_backport==0.2.2
 exceptiongroup==1.2.2
 filelock==3.18.0
 fire==0.7.0
-fitz==0.0.1.dev2
+fitz
 Flask==3.1.0
 fonttools==4.57.0
 h11==0.14.0
