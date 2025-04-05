@@ -2,13 +2,11 @@
 FROM python:3.9-slim
 
 # Install system dependencies, including libgomp and ccache
-RUN apt-get update && apt-get install wget libgomp1 libgl1-mesa-glx libglib2.0-0 libsm6 libxext6  -y \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && apt-get install libgomp1 libgl1-mesa-glx libglib2.0-0 libsm6 libxext6  -y \
+#     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Download and install the specific version of libssl1.1
-RUN wget http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.19_amd64.deb && \
-    dpkg -i libssl1.1_1.1.1f-1ubuntu2.19_amd64.deb && \
-    rm libssl1.1_1.1.1f-1ubuntu2.19_amd64.deb
+RUN apt-get update && apt-get install -y \
+    libgl1
 
 # Set the working directory
 WORKDIR /app
@@ -17,7 +15,7 @@ WORKDIR /app
 COPY . /app
 # Set environment variables to ensure logs are displayed
 ENV PYTHONUNBUFFERED=1
-ENV FLASK_ENV=development
+# ENV FLASK_ENV=development
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt

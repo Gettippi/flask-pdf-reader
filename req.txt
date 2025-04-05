@@ -1,0 +1,4 @@
+paddlepaddle
+paddleocr
+PyMuPDF
+Flask
