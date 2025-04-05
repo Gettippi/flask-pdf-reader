@@ -2,9 +2,7 @@
 FROM python:3.9-slim
 
 # Install system dependencies, including libgomp and ccache
-RUN apt-get update && apt-get install -y \
-    libgomp1 \
-    ccache \
+RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory
