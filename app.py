@@ -7,7 +7,7 @@ import gc
 app = Flask(__name__)
 
 # Initialize PaddleOCR
-
+ocr = PaddleOCR(use_angle_cls=True, lang='en')
 
 # Temporary folder to save uploaded files
 UPLOAD_FOLDER = './uploads'
@@ -26,7 +26,7 @@ def extract_text():
 
     try:
         # Use PaddleOCR to extract text
-        ocr = PaddleOCR(use_angle_cls=True, lang='en')
+        
         result = ocr.ocr(file_path, cls=True)
         text = "\n".join([line[1][0] for page in result for line in page])
         os.remove(file_path)  # Clean up the uploaded file
@@ -36,7 +36,7 @@ def extract_text():
         return jsonify({"error": str(e)}), 500
     finally:
         # Clean up any remaining garbage
-        del ocr
+        del result
         gc.collect()
 
 if __name__ == '__main__':
