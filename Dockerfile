@@ -5,6 +5,11 @@ FROM python:3.9-slim
 RUN apt-get update && apt-get install libgomp1 libgl1-mesa-glx libglib2.0-0 libsm6 libxext6  -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Download and install the specific version of libssl1.1
+RUN wget http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.19_amd64.deb && \
+    dpkg -i libssl1.1_1.1.1f-1ubuntu2.19_amd64.deb && \
+    rm libssl1.1_1.1.1f-1ubuntu2.19_amd64.deb
+
 # Set the working directory
 WORKDIR /app
 
