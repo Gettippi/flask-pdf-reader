@@ -37,4 +37,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
 
 # Define the command to run the application
-CMD ["flask", "run", "--host=0.0.0.0"]
+# CMD ["flask", "run", "--host=0.0.0.0"]
+
+# Run Gunicorn with the config file
+CMD ["gunicorn", "-c", "gunicorn.conf.py", "app:app"]
