@@ -36,8 +36,12 @@ def extract_text():
         return jsonify({"error": str(e)}), 500
     finally:
         # Clean up any remaining garbage
-        del result
-        gc.collect()
+        try:
+            del result  # Delete the OCR result to free up memory
+            gc.collect()
+        except Exception as e:
+            print(f"Error during garbage collection: {e}")
+        
 
 # if __name__ == '__main__':
 #     app.run(
